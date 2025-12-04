@@ -11,17 +11,17 @@ get('/') do
 
   db=SQLite3::Database.new('db/todos.db')
   db.results_as_hash = true
-  @databastodos = db.execute("SELECT * FROM todos")
-
+  @databastodos = db.execute("SELECT * FROM todos WHERE done = 0")
+  @databastodosdone = db.execute("SELECT * FROM todos WHERE done = 1")
   p @databastodos
   slim(:"index")
 
 end
 
 
-#ta bort en djur
+
 post('/:id/delete') do
-#Hämta djur
+
   id = params[:id].to_i
 #koppla till databasen
   db = SQLite3::Database.new('db/todos.db')
@@ -62,4 +62,28 @@ post('/:id/update')do
   db.execute("UPDATE todos SET name=?, description=? WHERE id=?",[name, description, id])
   redirect('/')
 
+end
+
+post('/:id/done') do
+
+  id = params[:id].to_i
+#koppla till databasen
+  db = SQLite3::Database.new('db/todos.db')
+  db.results_as_hash = true
+  db.execute("UPDATE todos SET done = 1 WHERE id = ?",id)
+
+  
+  redirect('/')
+end
+
+post('/:id/undone') do
+
+  id = params[:id].to_i
+#koppla till databasen
+  db = SQLite3::Database.new('db/todos.db')
+  db.results_as_hash = true
+  db.execute("UPDATE todos SET done = 0 WHERE id = ?",id)
+
+  
+  redirect('/')
 end

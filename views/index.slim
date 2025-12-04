@@ -4,8 +4,9 @@ form action="/new" method="post"
     input type="text" name="new_todo" placeholder="att göra lista"
     input type="text" name="description" placeholder="blah"
     input type="submit" value="Lägg till"
-
+h2 Att göra
 - @databastodos.each do |todos|
+
     h3 
         a href="/todos/#{todos["id"]}/edit" 
             |#{todos["name"]}
@@ -14,5 +15,18 @@ form action="/new" method="post"
     form action="/#{todos["id"]}/delete" method="post" 
         input type="submit" value="ta bort 🤣😒"
 
-hr
+    form action="/#{todos["id"]}/done" method="post" 
+        input type="submit" value="done"
 
+hr
+h2 klara saker
+- @databastodosdone.each do |todos|
+    h3 
+            |#{todos["name"]}
+    p  #{todos["description"]}
+
+    form action="/#{todos["id"]}/delete" method="post" 
+        input type="submit" value="ta bort 🤣😒"
+
+    form action="/#{todos["id"]}/undone" method="post" 
+        input type="submit" value="undone"
