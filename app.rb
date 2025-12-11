@@ -35,7 +35,7 @@ post('/new')do
   description = params[:description]
   
   db = SQLite3::Database.new('db/todos.db')
-  db.execute("INSERT INTO todos (name, description) VALUES (?,?)", [new_todo, description])
+  db.execute("INSERT INTO todos (name, description, done) VALUES (?,?,0)", [new_todo, description])
   redirect('/')
 
 end

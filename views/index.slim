@@ -1,22 +1,23 @@
 h1 lägg till saker att göra
 
-form action="/new" method="post"
-    input type="text" name="new_todo" placeholder="att göra lista"
-    input type="text" name="description" placeholder="blah"
-    input type="submit" value="Lägg till"
+form action="/new" method="post" 
+    input type="text" name="new_todo" placeholder="att göra lista" class="loda"
+    input type="text" name="description" placeholder="blah" class="loda"
+    input type="submit" value="Lägg till" class="loda"
 h2 Att göra
-- @databastodos.each do |todos|
-
+    
+- @databastodos.each do |todos| 
+    
     h3 
         a href="/todos/#{todos["id"]}/edit" 
             |#{todos["name"]}
     p  #{todos["description"]}
 
-    form action="/#{todos["id"]}/delete" method="post" 
-        input type="submit" value="ta bort 🤣😒"
+    form action="/#{todos["id"]}/delete" method="post"  
+        input type="submit" value="ta bort 🤣😒" class="loda"
 
     form action="/#{todos["id"]}/done" method="post" 
-        input type="submit" value="done"
+        input type="submit" value="done" class="loda"
 
 hr
 h2 klara saker
